@@ -1,0 +1,23 @@
+//get default wallet on the system
+select wrl_type wallet,status,wrl_parameter wallet_location from v$encryption_wallet;
+
+//create new wallet
+>orapki wallet create -wallet C:\oraclexe\app\oracle\admin\XE\wallet -pwd Aa123456789$ -auto_login
+
+//create new Self Singed Certificate 
+> orapki wallet add -wallet "C:\oraclexe\app\oracle\admin\XE\wallett" -pwd Aa123456789$ -dn "CN='trafosdb2.elsewedy.home'" -keysize 1024 -self_signed -validity 3650
+
+//export Self signed Certificate  
+>orapki wallet export -wallet "C:\oraclexe\app\oracle\admin\XE\wallet" -pwd Aa123456789$ -dn "CN='trafosdb2.elsewedy.home'" -cert C:\oraclexe\app\oracle\admin\XE\https_certificate\trafosdb2.elsewedy.home.crt
+
+// adding new CA Trust certificate   
+>orapki wallet add -wallet "C:\oraclexe\app\oracle\admin\XE\wallet" -trusted_cert -cert "C:\oraclexe\app\oracle\admin\XE\https_certificate\preprodeeirsarca.crt" -pwd Aa123456789$
+
+//show all certificate on server
+>orapki wallet display -wallet "C:\oraclexe\app\oracle\admin\XE\wallet" 
+
+//To Remove All Trust Certificate on wallet
+>orapki wallet remove -trusted_cert_all -wallet C:\oraclexe\app\oracle\admin\XE\wallet  -pwd Aa123456789$	
+
+//To Remove All User Certificate on wallet
+>orapki wallet remove -trusted_cert_all -wallet C:\oraclexe\app\oracle\admin\XE\wallet -pwd Aa123456789$	
