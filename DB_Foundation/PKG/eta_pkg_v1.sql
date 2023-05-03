@@ -2,22 +2,6 @@
     Developed by MO.atia  
     Version R2  1.9.22
 */
-/* Formatted on 11/8/2020 8:35:51 AM (QP5 v5.326) */
-CREATE OR REPLACE PACKAGE eta_pkg
-AS
-    FUNCTION get_eta_json_payload (p_trx_number IN NUMBER)
-        RETURN CLOB;
-
-    FUNCTION get_token (p_host              VARCHAR2,
-                        p_cust_id           VARCHAR2,
-                        p_client_secert     VARCHAR2)
-        RETURN varchar2;
-
-    FUNCTION submitDocument (p_host VARCHAR2, p_trx_number NUMBER)
-        RETURN CLOB;
-                  
-END eta_pkg;
-/
 
 CREATE OR REPLACE PACKAGE eta_pkg
 AS
@@ -195,7 +179,7 @@ AS
         --close invoiceLines structure array
         APEX_JSON.write_raw ('totalSalesAmount', 23.00000); --Sum all all InvoiceLine/SalesTotal items
         APEX_JSON.write_raw ('totalDiscountAmount', 23.00000);
-        APEX_JSON.write_raw ('netAmount', 23.00000); -- TotalSales – TotalDiscount
+        APEX_JSON.write_raw ('netAmount', 23.00000); -- TotalSales Â– TotalDiscount
         APEX_JSON.open_array ('taxTotals');
         APEX_JSON.open_object;
         APEX_JSON.write ('taxType', 'T1');
